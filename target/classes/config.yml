@@ -1,0 +1,35 @@
+# ========== MyPets 配置文件 ==========
+# 语言: zh_CN / zh_TW / ja_JP / ko_KR
+language: "zh_CN"
+
+# 基础版设置
+max_farms: 1
+selection_tool: "WOODEN_SHOVEL"
+colored_egg_names: true
+price_per_block: 0.2
+
+max_farm_size_x: 20
+max_farm_size_y: 20
+max_farm_size_z: 20
+
+# 高级版功能（设为 true 启用）
+premium:
+  max_farms: 3
+  enable_capture: false
+  gui_chest: false
+  custom_spawn: false
+  custom_chest: false
+  farm_heal: false
+  farm_pricing: false
+  gui_menu: false
+  max_pets_per_farm: 10
+  flags: false
+  leash_teleport: false
+  ride_teleport: false
+  max_farm_size_x: 100
+  max_farm_size_y: 50
+  max_farm_size_z: 100
+
+  # 世界白名单（留空 = 所有世界可用）
+  world_whitelist: []
+  world_whitelist_enabled: false

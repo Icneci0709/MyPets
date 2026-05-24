@@ -1,0 +1,96 @@
+name: MyPets
+version: 1.0.0
+main: com.icenci.mypets.MyPets
+api-version: "1.20"
+description: 宠物管理与农场系统
+
+commands:
+  pet:
+    description: 宠物管理菜单
+    usage: /pet
+  farm:
+    description: 农场管理系统
+    usage: /farm
+  mp:
+    description: MyPets 管理指令
+    usage: /mp reload
+    permission: mypets.command.mp
+    permission-message: §c你没有权限执行此操作。
+
+permissions:
+  # ========== 命令权限 ==========
+  mypets.command.pet:
+    description: 使用 /pet 命令
+    default: true
+  mypets.command.pet.capture:
+    description: 封印宠物 /pet capture
+    default: op
+  mypets.command.pet.setfarm:
+    description: 手动绑定农场 /pet setfarm
+    default: op
+  mypets.command.pet.share:
+    description: 共享骑乘 /pet share
+    default: op
+  mypets.command.pet.kill:
+    description: 处决宠物 /pet kill
+    default: true
+  mypets.command.pet.release:
+    description: 放生宠物 /pet release
+    default: true
+  mypets.command.farm:
+    description: 使用 /farm 命令
+    default: true
+  mypets.command.farm.box:
+    description: 移动保险箱 /farm box
+    default: op
+  mypets.command.farm.flag:
+    description: 农场权限设置 /farm flag
+    default: op
+  mypets.command.farm.setspawn:
+    description: 设置传送点 /farm setspawn
+    default: op
+  mypets.command.farm.remove:
+    description: 删除农场 /farm remove
+    default: true
+  mypets.command.mp:
+    description: 使用 /mp 命令
+    default: op
+
+  # ========== 管理权限 ==========
+  mypets.admin.reload:
+    description: 重载 MyPets 配置 /mp reload
+    default: op
+  mypets.admin.lang:
+    description: 热切换服务器语言 /mp lang
+    default: op
+  mypets.admin.world:
+    description: 管理世界白名单 /mp world
+    default: op
+
+  # ========== 绕过限制权限 ==========
+  mypets.bypass.flag:
+    description: 绕过农场权限 Flag 限制
+    default: op
+  mypets.bypass.chest:
+    description: 打开任何玩家的农场保险箱
+    default: op
+  mypets.bypass.build:
+    description: 在别人农场建造/破坏
+    default: op
+  mypets.bypass.ride:
+    description: 骑乘别人的宠物
+    default: op
+  mypets.bypass.leash:
+    description: 栓走别人的宠物
+    default: op
+
+  # ========== 特殊权限 ==========
+  mypets.capture.others:
+    description: 封印不属于自己的宠物
+    default: op
+  mypets.egg.release:
+    description: 释放封印蛋
+    default: true
+  mypets.egg.release.others:
+    description: 释放别人的封印蛋（高级版）
+    default: op
