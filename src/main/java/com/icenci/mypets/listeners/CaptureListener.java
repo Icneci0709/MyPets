@@ -204,8 +204,8 @@ public class CaptureListener implements Listener {
                 player.sendMessage(lang.get("pet.capture.not_tamed"));
                 return true;
             }
-            if (tameable.getOwner() != player && !player.isOp() &&
-                !player.hasPermission("mypets.capture.others")) {
+            if (tameable.getOwner() == null || (!tameable.getOwner().getUniqueId().equals(player.getUniqueId()) && !player.isOp() &&
+                !player.hasPermission("mypets.capture.others"))) {
                 player.sendMessage(lang.get("pet.capture.not_owner"));
                 return true;
             }

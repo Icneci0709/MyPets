@@ -50,7 +50,7 @@ public class PetCommand implements CommandExecutor, TabCompleter {
                 Entity vehicle = player.getVehicle();
                 if (vehicle instanceof Tameable) {
                     Tameable t = (Tameable) vehicle;
-                    if (t.isTamed() && t.getOwner() == player) {
+                    if (t.isTamed() && t.getOwner() != null && t.getOwner().getUniqueId().equals(player.getUniqueId())) {
                         targetPet = findPetByUuid(data, uuid, vehicle.getUniqueId().toString());
                         hasMount = true;
                     }
@@ -59,7 +59,7 @@ public class PetCommand implements CommandExecutor, TabCompleter {
                     Entity target = player.getTargetEntity(5);
                     if (target instanceof Tameable) {
                         Tameable t = (Tameable) target;
-                        if (t.isTamed() && t.getOwner() == player && isSitting(target)) {
+                        if (t.isTamed() && t.getOwner() != null && t.getOwner().getUniqueId().equals(player.getUniqueId()) && isSitting(target)) {
                             targetPet = findPetByUuid(data, uuid, target.getUniqueId().toString());
                         }
                     }
@@ -211,7 +211,7 @@ public class PetCommand implements CommandExecutor, TabCompleter {
             Entity vehicle = player.getVehicle();
             if (vehicle instanceof Tameable) {
                 Tameable t = (Tameable) vehicle;
-                if (t.isTamed() && t.getOwner() == player) {
+                if (t.isTamed() && t.getOwner() != null && t.getOwner().getUniqueId().equals(player.getUniqueId())) {
                     targetPet = findPetByUuid(data, uuid, vehicle.getUniqueId().toString());
                 }
             }
@@ -219,7 +219,7 @@ public class PetCommand implements CommandExecutor, TabCompleter {
                 Entity target = player.getTargetEntity(5);
                 if (target instanceof Tameable) {
                     Tameable t = (Tameable) target;
-                    if (t.isTamed() && t.getOwner() == player && isSitting(target)) {
+                    if (t.isTamed() && t.getOwner() != null && t.getOwner().getUniqueId().equals(player.getUniqueId()) && isSitting(target)) {
                         targetPet = findPetByUuid(data, uuid, target.getUniqueId().toString());
                     }
                 }
@@ -314,14 +314,14 @@ public class PetCommand implements CommandExecutor, TabCompleter {
         Entity target = player.getTargetEntity(5);
         if (target instanceof Tameable) {
             Tameable tameable = (Tameable) target;
-            if (tameable.isTamed() && tameable.getOwner() == player) {
+            if (tameable.isTamed() && tameable.getOwner() != null && tameable.getOwner().getUniqueId().equals(player.getUniqueId())) {
                 for (PetData p : data.loadPlayerPets(uuid)) if (p.getUuid().equals(target.getUniqueId().toString())) return p;
             }
         }
         Entity vehicle = player.getVehicle();
         if (vehicle instanceof Tameable) {
             Tameable tameable = (Tameable) vehicle;
-            if (tameable.isTamed() && tameable.getOwner() == player) {
+            if (tameable.isTamed() && tameable.getOwner() != null && tameable.getOwner().getUniqueId().equals(player.getUniqueId())) {
                 for (PetData p : data.loadPlayerPets(uuid)) if (p.getUuid().equals(vehicle.getUniqueId().toString())) return p;
             }
         }

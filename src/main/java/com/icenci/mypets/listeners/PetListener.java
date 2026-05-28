@@ -8,7 +8,6 @@ import com.icenci.mypets.pets.RideablePetAdapter;
 import com.icenci.mypets.utils.LangManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -177,25 +176,28 @@ public class PetListener implements Listener {
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
         Player player = event.getPlayer();
         Entity target = event.getRightClicked();
-        if (!(target instanceof Camel)) return;
-        if (player.getInventory().getItemInMainHand().getType() != Material.CACTUS) return;
-        Camel camel = (Camel) target;
-        String petUuid = camel.getUniqueId().toString();
+        if (!(target instanceof Tameable)) return;
+        Tameable tameable = (Tameable) target;
+        if (!tameable.isTamed() || tameable.getOwner() == null) return;
+        if (!tameable.getOwner().getUniqueId().equals(player.getUniqueId())) return;
+        String petUuid = target.getUniqueId().toString();
+        // 已注册则跳过
         if (data.findOwnerUuidByPetUuid(petUuid) != null) return;
-        registerPet(player, camel);
+        registerPet(player, (LivingEntity) target);
     }
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         Entity vehicle = player.getVehicle();
-        if (vehicle == null) return;
-        if (!(vehicle instanceof Camel || vehicle instanceof Strider || vehicle instanceof Llama)) return;
-        LivingEntity mount = (LivingEntity) vehicle;
-        String petUuid = mount.getUniqueId().toString();
+        if (!(vehicle instanceof Tameable)) return;
+        Tameable mount = (Tameable) vehicle;
+        if (!mount.isTamed() || mount.getOwner() == null) return;
+        if (!mount.getOwner().getUniqueId().equals(player.getUniqueId())) return;
+        String petUuid = ((Entity) mount).getUniqueId().toString();
         if (isAlreadyRegistered(player, petUuid)) return;
         if (data.findOwnerUuidByPetUuid(petUuid) != null) return;
-        registerPet(player, mount);
+        registerPet(player, (LivingEntity) mount);
     }
 
     // ========== 骑乘传送 + 栓绳传送 ==========
